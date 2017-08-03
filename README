@@ -1,0 +1,130 @@
+Copyright (C) 2015 Leibniz Institute for Natural  Product  Research  and
+Infection Biology -- Hans-Knoell-Institute (HKI)
+
+This program comes with ABSOLUTELY NO WARRANTY. This is  free  software,
+and you are welcome to redistribute it under certain conditions. See the
+file COPYING, which you should have received along  with  this  program,
+for details.
+
+     ##############################################################
+     # SMIPS - (S)econdary (M)etablolites from (I)nter(P)ro(S)can #
+     ##############################################################
+
+SMIPS is  a  tool  to  predict  secondary  metabolite  (SM)  anchor  (or
+backbone) genes in protein sequences. These enzymes play a major role in
+synthesizing secondary metabolites and their genes are  often  clustered
+together with others participating in the same metabolic pathway. Common
+SM anchor genes are Polyketide synthases (PKS) and Non-ribosomal peptide
+synthetases  (NRPS).  The  predictions  are  based  on  protein   domain
+annotations provided by InterProScan.
+
+
+usage: smips [ options ] [ <interproscan_file.[tsv|out|tab]> | <protein_sequences.fasta> ]
+
+options:
+
+   --path-to-interproscan, -p <path>
+
+        Path to InterProScan software, including the file name.  Usually
+        the file name is "interproscan.sh". If not specified, SMIPS uses
+        the "which" command to figure out the location of  InterProScan.
+        Only needed if a FASTA file is given.
+
+
+SMIPS accepts one (many) InterProScan  output  file(s)  in  TSV  or  OUT
+format, or the corresponding JGI files  in  TAB  format,  as  input.  It
+analyses them for typical SM  anchor/backbone  genes  and  writes  their
+domain structure, along with additionl information, to two files in  CSV
+format, extending the file name(s) of the input file(s).
+
+As an alternative, SMIPS accepts protein sequence files in FASTA format.
+If  InterProScan  is  installed  on  your  machine,  SMIPS  first  calls
+InterProScan with the given FASTA file(s) and  than  proceeds  with  the
+resulting TSV file(s).
+
+If you don't have a proper InterProScan output at hand, you may download
+and install InterProScan from
+
+   http://www.ebi.ac.uk/interpro/download.html
+
+and apply the following command-line to get the desired file (SMIPS will
+apply the very same command-line, if you run it with a FASTA file)
+
+   interproscan.sh -appl PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM -i <fasta file with protein sequences> -f tsv,svg -iprlookup
+
+InterProScan HTML output is broken, hence using SVG. However, it's  only
+for graphical (webservice-like) output and optional - you may omit  that
+option.
+
+These mappings inside the SMIPS' source code are used to assign  protein
+domains and anchor genes to this or that category (change them,  if  you
+like):
+
+InterPro IPR ID => Anchor gene domain type (%iprs variable):
+{
+  'IPR000537' => 'Prenyltransferase',
+  'IPR000873' => 'A',
+  'IPR001031' => 'TE',
+  'IPR001242' => 'C',
+  'IPR003231' => 'PP',
+  'IPR004033' => 'MT',
+  'IPR004568' => 'PP',
+  'IPR006162' => 'PP',
+  'IPR006765' => 'Cyc',
+  'IPR008278' => 'PP',
+  'IPR009081' => 'PP',
+  'IPR010060' => 'xNRPS',
+  'IPR010071' => 'A',
+  'IPR010080' => 'TE',
+  'IPR011032' => 'ER',
+  'IPR012148' => 'Prenyltransferase',
+  'IPR012728' => 'xNRPS',
+  'IPR013149' => 'ER',
+  'IPR013154' => 'ER',
+  'IPR013216' => 'MT',
+  'IPR013217' => 'MT',
+  'IPR013601' => 'xPKS',
+  'IPR013624' => 'xNRPS',
+  'IPR013968' => 'KR',
+  'IPR014030' => 'KS',
+  'IPR014031' => 'KS',
+  'IPR014043' => 'AT',
+  'IPR015083' => 'xPKS',
+  'IPR016035' => 'AT',
+  'IPR016036' => 'AT',
+  'IPR017795' => 'Prenyltransferase',
+  'IPR017796' => 'Prenyltransferase',
+  'IPR018201' => 'KS',
+  'IPR020801' => 'AT',
+  'IPR020802' => 'TE',
+  'IPR020803' => 'MT',
+  'IPR020806' => 'PP',
+  'IPR020807' => 'DH',
+  'IPR020841' => 'KS',
+  'IPR020842' => 'KR',
+  'IPR020843' => 'ER',
+  'IPR020845' => 'A',
+  'IPR025110' => 'A',
+  'IPR029063' => 'MT'
+}
+
+Anchor gene domain type => Anchor gene type (%domains variable):
+{
+  'A' => 'NRPS',
+  'AT' => 'PKS',
+  'C' => 'NRPS',
+  'Cyc' => 'PKS',
+  'DH' => 'PKS',
+  'ER' => 'PKS',
+  'KR' => 'PKS',
+  'KS' => 'PKS',
+  'MT' => 'PKS/NRPS',
+  'PP' => 'PKS/NRPS',
+  'Prenyltransferase' => 'DMATS',
+  'TE' => 'PKS/NRPS',
+  'xNRPS' => 'NRPS',
+  'xPKS' => 'PKS'
+}
+
+
+Contact: ekaterina.shelest@hki-jena.de, thomas.wolf@hki-jena.de
