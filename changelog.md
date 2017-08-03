@@ -1,3 +1,6 @@
+# 2017-08-03 #
+* [web] move source code, binaries and changelog to github
+
 # 2017-04-24 #
 * change MT domain from beeing PKS specific to just beeing an anchor gene domain in general (PKS or NRPS)
 
