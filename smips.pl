@@ -34,6 +34,8 @@
 # Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 #
 # Contact: ekaterina.shelest@hki-jena.de, thomas.wolf@hki-jena.de
+#
+# Cite: If you use SMIPS, please cite https://doi.org/10.1093/bioinformatics/btv713
 
 use 5.14.2;
 
@@ -204,7 +206,9 @@ sub usage()
 	  . Dumper( \%iprs ) . "\n"
 	  . "Anchor gene domain type => Anchor gene type (%domains variable):\n"
 	  . Dumper( \%domains ) . "\n\n"
-	  . "Contact: ekaterina.shelest\@hki-jena.de, thomas.wolf\@hki-jena.de";
+	  . "Contact: ekaterina.shelest\@hki-jena.de, thomas.wolf\@hki-jena.de"
+	  . "\n\n"
+	  . "Cite: If you use SMIPS, please cite https://doi.org/10.1093/bioinformatics/btv713";
 
 	# print README to file
 	open( my $readme, ">", "README" ) or die "Cannot write to file \"./README\".\n", $!;
