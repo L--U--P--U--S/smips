@@ -1,3 +1,9 @@
+# 2018-03-13 #
+* [web] tried to update the server version of InterProScan from 5.19 to 5.27
+  * v5.27 does not work because of outdated glibc and libgnutls libraries
+  * reverted to v5.19
+  * need newer server OS to update InterProScan
+
 # 2017-08-14 #
 * Add citing information to readme
 
