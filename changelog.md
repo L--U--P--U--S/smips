@@ -1,3 +1,8 @@
+# 2019-03-08 #
+* [web] move SMIPS to a dedicated web server
+* [web] update InterProScan to version 5.33-72.0
+* [web] HTML output bug should be fixed in this version of InterProScan --> switch from SVG to HTML output
+
 # 2018-03-13 #
 * [web] tried to update the server version of InterProScan from 5.19 to 5.27
   * v5.27 does not work because of outdated glibc and libgnutls libraries
