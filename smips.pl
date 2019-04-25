@@ -33,9 +33,7 @@
 # Sie sollten eine Kopie der GNU General Public License zusammen mit diesem
 # Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
 #
-# Contact: ekaterina.shelest@hki-jena.de, thomas.wolf@hki-jena.de
-#
-# Cite: If you use SMIPS, please cite https://doi.org/10.1093/bioinformatics/btv713
+# Contact: gianni.panagiotou@leibniz-hki.de, thomas.wolf@leibniz-hki.de
 
 use 5.14.2;
 
@@ -43,7 +41,7 @@ use strict;
 use warnings;
 
 use Getopt::Long;
-use List::AllUtils qw(any);
+use List::Util qw(any);
 use Scalar::Util qw(looks_like_number);
 use Sort::Naturally;
 use IPC::System::Simple qw(system);    # improved behavior of Perl's "system()" call
@@ -194,10 +192,12 @@ sub usage()
 		{ justify => "full", all => 1 }
 	  )
 	  . "\n"
-	  . "   interproscan.sh -appl PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM -i <fasta file with protein sequences> -f tsv,svg -iprlookup\n"
+	  # . "   interproscan.sh -appl PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM -i <fasta file with protein sequences> -f tsv,svg -iprlookup\n" # for older InterProScan versions with HTML bug
+	  . "   interproscan.sh -appl PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM -i <fasta file with protein sequences> -f tsv,html -iprlookup\n"
 	  . "\n"
 	  . autoformat(
-"InterProScan HTML output is broken, hence using SVG. However, it's only for graphical (webservice-like) output and optional - you may omit that option.\n\n"
+# "InterProScan HTML output is broken, hence using SVG. However, it's only for graphical (webservice-like) output and optional - you may omit that option.\n"
+           "\n"
 		  . "These mappings inside the SMIPS' source code are used to assign protein domains and anchor genes to this or that category (change them, if you like):",
 		{ justify => "full", all => 1 }
 	  )
@@ -206,9 +206,7 @@ sub usage()
 	  . Dumper( \%iprs ) . "\n"
 	  . "Anchor gene domain type => Anchor gene type (%domains variable):\n"
 	  . Dumper( \%domains ) . "\n\n"
-	  . "Contact: ekaterina.shelest\@hki-jena.de, thomas.wolf\@hki-jena.de"
-	  . "\n\n"
-	  . "Cite: If you use SMIPS, please cite https://doi.org/10.1093/bioinformatics/btv713";
+	  . "Contact: gianni.panagiotou\@leibniz-hki.de, thomas.wolf\@leibniz-hki.de";
 
 	# print README to file
 	open( my $readme, ">", "README" ) or die "Cannot write to file \"./README\".\n", $!;
@@ -303,7 +301,8 @@ while ( my $input_file = shift )
 		# run interproscan on protein fasta input file
 		say "Running InterProScan on protein sequences file \"$input_file\". This may take several hours. Please be patient …";
 		say "\n>>>>> InterProScan BEGIN >>>>>";
-		system( $path_to_interproscan, "-appl", "PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM", "-i", $input_file, "-f", "tsv,svg", "-iprlookup" );
+		# system( $path_to_interproscan, "-appl", "PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM", "-i", $input_file, "-f", "tsv,svg", "-iprlookup" ); # for older InterProScan versions with HTML bug
+		system( $path_to_interproscan, "-appl", "PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM", "-i", $input_file, "-f", "tsv,html", "-iprlookup" );
 		say "<<<<< InterProScan END <<<<<\n";
 
 		# point to new interproscan output file
