@@ -19,7 +19,7 @@ synthetases  (NRPS).  The  predictions  are  based  on  protein   domain
 annotations provided by InterProScan.
 
 
-usage: smips [ options ] [ <interproscan_file.[tsv|out|tab]> | <protein_sequences.fasta> ]
+usage: smips.pl [ options ] [ <interproscan_file.[tsv|out|tab]> | <protein_sequences.fasta> ]
 
 options:
 
@@ -50,11 +50,8 @@ and install InterProScan from
 and apply the following command-line to get the desired file (SMIPS will
 apply the very same command-line, if you run it with a FASTA file)
 
-   interproscan.sh -appl PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM -i <fasta file with protein sequences> -f tsv,svg -iprlookup
+   interproscan.sh -appl PrositePatterns,SuperFamily,PfamA,SMART,TIGRFAM -i <fasta file with protein sequences> -f tsv,html -iprlookup
 
-InterProScan HTML output is broken, hence using SVG. However, it's  only
-for graphical (webservice-like) output and optional - you may omit  that
-option.
 
 These mappings inside the SMIPS' source code are used to assign  protein
 domains and anchor genes to this or that category (change them,  if  you
@@ -127,6 +124,4 @@ Anchor gene domain type => Anchor gene type (%domains variable):
 }
 
 
-Contact: ekaterina.shelest@hki-jena.de, thomas.wolf@hki-jena.de
-
-Cite: If you use SMIPS, please cite https://doi.org/10.1093/bioinformatics/btv713
+Contact: gianni.panagiotou@leibniz-hki.de, thomas.wolf@leibniz-hki.de
